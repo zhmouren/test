@@ -31,6 +31,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   const width = url.searchParams.get('width');
   const height = url.searchParams.get('height');
   const quality = url.searchParams.get('quality') || '80';
+  const isVideo = obj.httpMetadata?.contentType?.startsWith('video/');
 
   let responseInit = {
     headers: {
@@ -43,6 +44,22 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   if ((width || height) && obj.httpMetadata?.contentType?.startsWith('image/')) {
     responseInit.headers['content-type'] = obj.httpMetadata.contentType;
     return new Response(obj.body, responseInit);
+  }
+
+  // 如果是视频请求缩略图但未提供，返回默认提示
+  if ((width || height) && isVideo) {
+    return new Response(
+      JSON.stringify({
+        error: '视频缩略图需要额外处理，当前系统不支持直接生成视频缩略图',
+        suggestion: '请考虑使用第三方视频处理服务或在前端使用默认占位图'
+      }),
+      {
+        status: 400,
+        headers: {
+          'content-type': 'application/json'
+        }
+      }
+    );
   }
 
   return new Response(obj.body, responseInit);
