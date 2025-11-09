@@ -523,4 +523,4 @@ openssl rand -base64 64
 
 Flow Album 是一个功能完整、性能优化、安全可靠的私人云相册解决方案。通过利用 Cloudflare Pages 和 R2 对象存储服务，提供了快速、稳定的媒体文件访问体验。项目采用现代化的技术栈，具有良好的可维护性和扩展性，适合个人或小团队部署使用。
 
-推荐使用 Cloudflare Pages 方案，因为它配置简单、自动集成前后端，并且充分利用了 Cloudflare 的全球 CDN 网络。如果你需要更复杂的逻辑处理，也可以考虑 Workers 方案。
+推荐使用 Cloudflare Pages 方案，因为它配置简单、自动集成前后端，并且充分利用了 Cloudflare 的全球 CDN 网络。如果你需要更复杂的逻辑处理，也可以考虑 Workers 方案。# test
